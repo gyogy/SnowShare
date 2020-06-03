@@ -1,11 +1,29 @@
-<h3>Login</h3>
-<form method="POST">
-	{% csrf_token %}
-	<input type="text" name="username">
-	<input type="password" name="password">
-	{% for message in messages %}
+{% load static %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+  <div class="row">
+  <form method="POST" class="col-xs-12 col-sm-12 col-md-12">
+  	{% csrf_token %}
+  <h2>Please fill the field to login!</h2>
+  <div class="form-group">
+  	<input type="text" class="form-control" id="username" placeholder="Enter username *" name="username" required>
+  </div>
+  	<div class="form-group">
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password *" name="password" required>
+   </div>
+   	{% for message in messages %}
 	<p>{{message}}</p>
 	{% endfor %}
-	<input type="submit" value="Login">
-</form>
+    <button type="submit" class="btn btn-success">Login<i class="glyphicon glyphicon-send"></i></button>
+  </form>
+  </div>
+</div>
+
+
 
