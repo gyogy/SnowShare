@@ -5,11 +5,14 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Car
+import copy
 
 
 @login_required(login_url='login')
 def index(request):
-    return render(request, 'accounts/index.html')
+    cars = Car.objects.filter(owner__username=request.user.username)
+    context = {"cars": cars}
+    return render(request, 'accounts/index.html', context)
 
 
 def registerPage(request):
@@ -32,8 +35,6 @@ def registerPage(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        cars = Car.objects.filter(owner__username=request.user.username)
-        context = {"user": request.user, "cars": cars}
         return redirect('index')
     else:
         if request.method == 'POST':
@@ -43,10 +44,8 @@ def loginPage(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                cars = Car.objects.filter(owner__username=user.username)
-                context = {"user": user, "cars": cars}
                 login(request, user)
-                return render(request, 'accounts/index.html', context)
+                return redirect('index')
             else:
                 messages.info(request, 'Username or password is incorrect')
 
@@ -59,6 +58,7 @@ def logoutUser(request):
     return redirect('login')
 
 
+@login_required(login_url='login')
 def new_car(request):
     if request.method == "POST":
         data = request.POST

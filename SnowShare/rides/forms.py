@@ -15,3 +15,4 @@ class CreateCar(forms.ModelForm):
     class Meta:
         model = Car
         fields = ('make', 'typ', 'capacity', 'owner')
+
