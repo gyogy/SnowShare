@@ -1,28 +1,38 @@
-<h3>Register</h3>
+{% load static %}
 
-<form method="POST">
-	{% csrf_token %}
-<!-- 	{{form.username.label}}
-	{{form.username}}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-	{{form.first_name.label}}
-	{{form.first_name}}
+<div class="container">
+  <div class="row">
+  <form method="POST" class="col-xs-12 col-sm-12 col-md-12">
+  	{% csrf_token %}
+  <h2>Please fill all mandatory(*) fields</h2>
+  <div class="form-group">
+  	<input type="text" class="form-control" id="username" placeholder="Enter username *" name="username" required>
+  </div>
+  <div class="form-group">
+      <input type="text" class="form-control" id="name" placeholder="Enter Name *" name="first_name" required>
+    </div>
+	
+	<div class="form-group">
+      <input type="text" class="form-control" id="surname" placeholder="Enter Second Name *" name="last_name" required>
+    </div>
+	
+    	<div class="form-group">
+      <input type="email" class="form-control" id="email" placeholder="Enter email *" name="email" required>
+    </div>
+	<div class="form-group">
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password *" name="password1" required>
+   </div>
+   <div class="form-group">
+      <input type="password" class="form-control" id="pwd" placeholder="Repeat password *" name="password2" required>
+   </div>
+    <button type="submit" class="btn btn-success">Submit <i class="glyphicon glyphicon-send"></i></button>
+  </form>
+  </div>
+</div>
 
-	{{form.last_name.label}}
-	{{form.last_name}}
-
-	{{form.email.label}}
-	{{form.email}}
-
-	{{form.passowrd1.label}}
-	{{form.password1}}
-
-	{{form.password2.label}}
-	{{form.password2}} -->
-	{{ form.as_p}}
-	{% for message in messages %}
-		<p>{{message}}</p>
-	{% endfor %}
-
-	<input type="submit" name="Create User">
-</form>
