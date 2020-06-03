@@ -1,11 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    nickname = models.CharField(max_length=20)
-    first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=40)
-    pw = models.CharField(max_length=40)
+# class User(models.Model):
+#     nickname = models.CharField(max_length=20)
+#     first_name = models.CharField(max_length=40)
+#     last_name = models.CharField(max_length=40)
+#     pw = models.CharField(max_length=40)
 
 
 class Car(models.Model):
@@ -26,7 +27,7 @@ class Car(models.Model):
         choices=CAR_TYPE_CHOICES,
         default=SEDAN,
     )
-    capacity = models.IntegerField
+    capacity = models.IntegerField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
