@@ -27,7 +27,7 @@ class Car(models.Model):
         choices=CAR_TYPE_CHOICES,
         default=SEDAN,
     )
-    capacity = models.IntegerField
+    capacity = models.IntegerField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

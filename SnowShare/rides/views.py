@@ -1,14 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CreateCar
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import Car
+import copy
 
 
 @login_required(login_url='login')
 def index(request):
-    return render(request, 'accounts/index.html')
+    cars = Car.objects.filter(owner__username=request.user.username)
+    context = {"cars": cars}
+    return render(request, 'accounts/index.html', context)
 
 
 def registerPage(request):
@@ -52,3 +56,19 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+@login_required(login_url='login')
+def new_car(request):
+    print(request.user.id)
+    if request.method == "POST":
+        data = request.POST
+        form = CreateCar(data=data)
+        if form.is_valid():
+            new_car = form.save(user=request.user)
+            return render(request, 'cars/car_detail.html', {'new_car': new_car})
+        else:
+            return render(request, 'cars/add_car.html', {'form': form})
+    else:
+        form = CreateCar()
+        return render(request, 'cars/add_car.html', {'form': form})
