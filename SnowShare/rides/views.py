@@ -60,11 +60,12 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def new_car(request):
+    print(request.user.id)
     if request.method == "POST":
         data = request.POST
         form = CreateCar(data=data)
         if form.is_valid():
-            new_car = form.save()
+            new_car = form.save(user=request.user)
             return render(request, 'cars/car_detail.html', {'new_car': new_car})
         else:
             return render(request, 'cars/add_car.html', {'form': form})

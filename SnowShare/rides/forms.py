@@ -14,5 +14,12 @@ class CreateUserForm(UserCreationForm):
 class CreateCar(forms.ModelForm):
     class Meta:
         model = Car
-        fields = ('make', 'typ', 'capacity', 'owner')
+        fields = ('make', 'typ', 'capacity')
+
+    def save(self, user=None, commit=True):
+        car = super(CreateCar, self).save(commit=False)
+        car.owner = user
+        if commit:
+            car.save()
+        return car
 
