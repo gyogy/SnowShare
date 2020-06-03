@@ -5,8 +5,8 @@
 <p>First Name: {{user.first_name}}</p>
 <p>Last Name: {{user.last_name}}</p>
 
-<button type="button"><a href="{% url 'add_car' %}">Add Car</a></button>
-
+<p><button type="button"><a href="{% url 'add_car' %}">Add Car</a></button><p/>
+<p><button type="button"><a href="{% url 'add_ride' %}">Add Ride</a></button><p/>
 
 <h3> My Cars: </h3>
 {% for car in cars %}
