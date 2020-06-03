@@ -22,4 +22,3 @@ class CreateCar(forms.ModelForm):
         if commit:
             car.save()
         return car
-
