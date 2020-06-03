@@ -1,1 +1,11 @@
 <h3>Login</h3>
+<form method="POST">
+	{% csrf_token %}
+	<input type="text" name="username">
+	<input type="password" name="password">
+	{% for message in messages %}
+	<p>{{message}}</p>
+	{% endfor %}
+	<input type="submit" value="Login">
+</form>
+
