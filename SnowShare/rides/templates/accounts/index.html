@@ -6,3 +6,11 @@
 <p>Last Name: {{user.last_name}}</p>
 
 <button type="button"><a href="{% url 'add_car' %}">Add Car</a></button>
+
+
+<h3> My Cars: </h3>
+{% for car in cars %}
+<p>Make: {{car.make}}</p>
+<p>Type: {{car.typ}}</p>
+<p>Capacity: {{car.capacity}}</p>
+{% endfor %}

@@ -4,6 +4,7 @@ from .forms import CreateUserForm, CreateCar
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import Car
 
 
 @login_required(login_url='login')
@@ -31,7 +32,8 @@ def registerPage(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        context = {"user": request.user}
+        cars = Car.objects.filter(owner__username=request.user.username)
+        context = {"user": request.user, "cars": cars}
         return redirect('index')
     else:
         if request.method == 'POST':
@@ -41,7 +43,8 @@ def loginPage(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                context = {"user": user}
+                cars = Car.objects.filter(owner__username=user.username)
+                context = {"user": user, "cars": cars}
                 login(request, user)
                 return render(request, 'accounts/index.html', context)
             else:
