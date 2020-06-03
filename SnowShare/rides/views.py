@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Car
-import copy
 
 
 @login_required(login_url='login')
@@ -72,3 +71,11 @@ def new_car(request):
     else:
         form = CreateCar()
         return render(request, 'cars/add_car.html', {'form': form})
+
+
+@login_required(login_url='login')
+def delete_car(request, car_id):
+    if request.method == 'POST':
+        print('hello')
+        Car.objects.filter(id=car_id).delete()
+    return redirect('index')
