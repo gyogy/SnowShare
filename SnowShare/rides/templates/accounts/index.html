@@ -1,15 +1,15 @@
-<button type="button"><a href="{% url 'logout' %}">Logout!</a></button>
+{% extends "accounts/base.html" %} {% block content %}
 
 <p>Name: {{user.username}} </p>
 <p>Email: {{user.email}} </p>
 <p>First Name: {{user.first_name}}</p>
 <p>Last Name: {{user.last_name}}</p>
 
-<p><button type="button"><a href="{% url 'add_car' %}">Add Car</a></button><p/>
-<p><button type="button"><a href="{% url 'add_ride' %}">Add Ride</a></button><p/>
-<p><button type="button"><a href="{% url 'take_ride' %}">Take Ride</a></button></p>
-<h3> My Cars: </h3>
+<!-- <h3> My Cars: </h3>
 {% for car in cars %}
 <p>Make: {{car.make}} Type: {{car.typ}}</p>
 <form method="POST" action="{% url 'delete_car' car.id %}">{% csrf_token %}<button>Delete</button></form>
 {% endfor %}
+ -->
+
+{%  endblock %}

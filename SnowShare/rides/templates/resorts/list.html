@@ -1,4 +1,9 @@
-<h2> Resorts: </h2>
+{% extends "accounts/base.html" %} {% block content %}
+
+<p class="h1" style="text-align:center">Resorts</p>
 {% for resort in resorts %}
 <p><a href="{% url 'resort_details' resort.id %}">{{resort.name}}</a></p>
+
 {% endfor%}
+
+{% endblock %}

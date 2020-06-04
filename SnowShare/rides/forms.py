@@ -40,11 +40,12 @@ class CreateRide(forms.ModelForm):
 class TakeRide(forms.ModelForm):
     class Meta:
         model = PassengerRide
-        fields = ('ride',)
-
-    def save(self, psg=None, commit=True):
+        exclude = ('ride', 'passanger')
+    
+    def save(self, psg=None, ride=None, commit=True):
         pass_ride = super(TakeRide, self).save(commit=False)
         pass_ride.passenger = psg
+        pass_ride.ride = ride
         if commit:
             pass_ride.save()
         return pass_ride

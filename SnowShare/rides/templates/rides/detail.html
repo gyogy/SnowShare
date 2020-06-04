@@ -1,6 +1,10 @@
+{% extends "accounts/base.html" %} {% block content %}
+
 <p>Destination: {{ride.destination}}</p>
 <p>Date: {{ride.date}}</p>
 <p>Driver: {{ride.driver.username}}</p>
 <p>Car: {{ride.car}}</p>
 <p>Free seats: {{ride.free_seats}}</p>
 <p>Price: {{ride.price}}</p>
+
+{% endblock %}
