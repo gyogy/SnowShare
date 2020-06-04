@@ -140,3 +140,19 @@ def resort_details(request, resort_id):
     resort = get_object_or_404(Resort, id=resort_id)
     rides = Ride.objects.filter(destination=resort_id)
     return render(request, 'resorts/detail.html', {'resort': resort, 'rides': rides})
+
+
+@login_required(login_url='login')
+def driver(request):
+    user_id = request.user.id
+    name = request.user.username
+    rides = Ride.objects.filter(driver=user_id)
+    return render(request, 'rides/driver.html', {'rides': rides, 'name': name})
+
+
+@login_required(login_url='login')
+def passanger(request):
+    user_id = request.user.id
+    name = request.user.username
+    rides = Ride.objects.filter(passengerride__passenger_id=user_id)
+    return render(request, 'rides/passanger.html', {'rides': rides, 'name': name})
