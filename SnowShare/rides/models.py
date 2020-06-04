@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 
 # class User(models.Model):
@@ -45,13 +46,14 @@ class Ride(models.Model):
     destination = models.ForeignKey(Resort, on_delete=models.CASCADE)
     driver = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    date = models.DateField(default=date.today)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    free_seats = models.IntegerField()
 
     def __str__(self):
-        return f'A ride to {self.destination}'
+        return f'A ride to {self.destination} with {self.free_seats} free seats.'
 
 
 class PassengerRide(models.Model):
-    ridel = models.ForeignKey(Ride, on_delete=models.CASCADE)
-    seats = models.IntegerField()
+    ride_id = models.ForeignKey(Ride, on_delete=models.CASCADE)
     passenger = models.ForeignKey(User, on_delete=models.CASCADE)
