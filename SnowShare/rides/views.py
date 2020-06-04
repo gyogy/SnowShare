@@ -108,7 +108,8 @@ def listRides(request):
 def view(request, ride_id):
     ride = get_object_or_404(Ride, id=ride_id)
     passangers = User.objects.filter(passengerride__ride_id=ride_id)
-    return render(request, 'rides/detail.html', {'ride': ride, 'psg': passangers})
+    names = [passanger.username for passanger in passangers]
+    return render(request, 'rides/detail.html', {'ride': ride, 'names': names})
 
 
 @login_required(login_url='login')
@@ -124,7 +125,8 @@ def take_ride(request):
             ride.free_seats -= 1
             ride.save()
             form.save(psg=request.user, ride=ride)
-            return redirect('resorts')
+            # return redirect('resorts')
+            return redirect('view', ride.id)
     else:
         form = TakeRide()
         return redirect('resorts')
