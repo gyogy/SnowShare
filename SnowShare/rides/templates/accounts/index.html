@@ -1,10 +1,28 @@
 {% extends "accounts/base.html" %} {% block content %}
+<div style="text-align:center;width: 80%; margin: auto; padding-top: 5%">
+<h1> Profile Info</h1>
+<table class="table" style= "border-width:1px; border-style: solid">
+ <tbody>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="row">{{user.username}}</th>
+    </tr>
+    <tr>
+      <th scope="col">Email</th>
+      <td>{{user.email}}</td>
+    </tr>
+    <tr>
+      <th scope="col">First Name</th>
+      <td>{{user.first_name}}</td>
+    </tr>
+    <tr>
+      <th scope="col">Last Name</th>
+      <td>{{user.last_name}}</td>
+    </tr>
 
-<p>Name: {{user.username}} </p>
-<p>Email: {{user.email}} </p>
-<p>First Name: {{user.first_name}}</p>
-<p>Last Name: {{user.last_name}}</p>
-
+  </tbody>
+</table>
+</div>
 <!-- <h3> My Cars: </h3>
 {% for car in cars %}
 <p>Make: {{car.make}} Type: {{car.typ}}</p>
