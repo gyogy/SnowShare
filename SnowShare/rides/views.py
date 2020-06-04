@@ -4,7 +4,7 @@ from .forms import CreateUserForm, CreateCar, CreateRide, TakeRide
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Car, Ride, Resort
+from .models import Car, Ride, Resort, User
 
 
 @login_required(login_url='login')
@@ -107,7 +107,8 @@ def listRides(request):
 @login_required(login_url='login')
 def view(request, ride_id):
     ride = get_object_or_404(Ride, id=ride_id)
-    return render(request, 'rides/detail.html', {'ride': ride})
+    passangers = User.objects.filter(passengerride__ride_id=ride_id)
+    return render(request, 'rides/detail.html', {'ride': ride, 'psg': passangers})
 
 
 @login_required(login_url='login')
@@ -140,3 +141,19 @@ def resort_details(request, resort_id):
     resort = get_object_or_404(Resort, id=resort_id)
     rides = Ride.objects.filter(destination=resort_id)
     return render(request, 'resorts/detail.html', {'resort': resort, 'rides': rides})
+
+
+@login_required(login_url='login')
+def driver(request):
+    user_id = request.user.id
+    name = request.user.username
+    rides = Ride.objects.filter(driver=user_id)
+    return render(request, 'rides/driver.html', {'rides': rides, 'name': name})
+
+
+@login_required(login_url='login')
+def passanger(request):
+    user_id = request.user.id
+    name = request.user.username
+    rides = Ride.objects.filter(passengerride__passenger_id=user_id)
+    return render(request, 'rides/passanger.html', {'rides': rides, 'name': name})

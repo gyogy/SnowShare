@@ -1,0 +1,13 @@
+{% extends "accounts/base.html" %} {% block content %}
+<h2>{{name}} is riding to:</h2>
+
+<ul>
+{% for ride in rides %}
+<li>
+    <a href="{% url 'view' ride.id %}">{{ride.destination}}, on {{ride.date}}</a>>
+</li>
+
+{% endfor%}
+</ul>
+
+{%  endblock %}
