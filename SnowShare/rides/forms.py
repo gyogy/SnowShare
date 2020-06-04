@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import Car, Ride
+from .models import Car, Ride, PassengerRide
 
 
 class CreateUserForm(UserCreationForm):
@@ -35,3 +35,16 @@ class CreateRide(forms.ModelForm):
         if commit:
             ride.save()
         return ride
+
+
+class TakeRide(forms.ModelForm):
+    class Meta:
+        model = PassengerRide
+        fields = ('ride',)
+
+    def save(self, psg=None, commit=True):
+        pass_ride = super(TakeRide, self).save(commit=False)
+        pass_ride.passenger = psg
+        if commit:
+            pass_ride.save()
+        return pass_ride

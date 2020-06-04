@@ -7,7 +7,7 @@
 
 <p><button type="button"><a href="{% url 'add_car' %}">Add Car</a></button><p/>
 <p><button type="button"><a href="{% url 'add_ride' %}">Add Ride</a></button><p/>
-
+<p><button type="button"><a href="{% url 'take_ride' %}">Take Ride</a></button></p>
 <h3> My Cars: </h3>
 {% for car in cars %}
 <p>Make: {{car.make}} Type: {{car.typ}}</p>

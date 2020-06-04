@@ -55,5 +55,5 @@ class Ride(models.Model):
 
 
 class PassengerRide(models.Model):
-    ride_id = models.ForeignKey(Ride, on_delete=models.CASCADE)
+    ride = models.ForeignKey(Ride, on_delete=models.CASCADE)
     passenger = models.ForeignKey(User, on_delete=models.CASCADE)
