@@ -95,7 +95,6 @@ def new_ride(request):
     else:
         form = CreateRide()
         form.fields["car"].queryset = cars
-<<<<<<< HEAD
         return render(request, 'rides/add.html', {'form': form})
 
 
@@ -107,8 +106,6 @@ def listRides(request):
 def view(request, ride_id):
     ride = get_object_or_404(Ride, id=ride_id)
     return render(request, 'rides/detail.html', {'ride': ride})
-=======
-        return render(request, 'rides/add_ride.html', {'form': form})
 
 
 @login_required(login_url='login')
@@ -131,4 +128,3 @@ def take_ride(request):
     else:
         form = TakeRide()
         return render(request, 'rides/take_ride.html', {'form': form})
->>>>>>> 3e7aff58156221f238ab1c833e096442c2db4a1c
