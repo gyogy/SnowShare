@@ -1,9 +1,26 @@
 {% extends "accounts/base.html" %} {% block content %}
 
 <p class="h1" style="text-align:center">Resorts</p>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Resort name</th>
+      <th scope="col">Search for a seat!</th>
+    </tr>
+  </thead>
+  <tbody>
 {% for resort in resorts %}
-<p><a href="{% url 'resort_details' resort.id %}">{{resort.name}}</a></p>
+
+    <tr>
+      <th scope="row">{{resort.name}}</th>
+      <td><button><a style="color:black;" href="{% url 'resort_details' resort.id %}">Find a seat!</button></a></td>
+    </tr>
 
 {% endfor%}
+  </tbody>
+</table>
+</ul>
 
 {% endblock %}

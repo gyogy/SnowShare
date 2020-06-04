@@ -1,10 +1,28 @@
 {% extends "accounts/base.html" %} {% block content %}
 
 <h2> All avaliable rides: </h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ride Destination</th>
+      <th scope="col">Ride date</th>
+      <th scope="col">Free seats</th>
+      <th scope="col">Price per seat</th>
+    </tr>
+  </thead>
 {% for ride in rides %}
 {% if ride.free_seats > 0 %}
-<p><a href="{% url 'view' ride.id %}">{{ ride.destination }}, {{ ride.free_seats}} seat(s), at {{ ride.price }} per seat.</a></p>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="{% url 'view' ride.id %}">{{ride.destination}}</a></th>
+      <td>{{ride.date}}</td>
+      <td>{{ride.free_seats}}</td>
+      <td>{{ride.price}}</td>
+    </tr>
 {% endif %}
-{% endfor %}
+{% endfor%}
+</tbody>
+</table>
 
 {% endblock %}
