@@ -1,0 +1,4 @@
+<h2> Resorts: </h2>
+{% for resort in resorts %}
+<p><a href="{% url 'resort_details' resort.id %}">{{resort.name}}</a></p>
+{% endfor%}
