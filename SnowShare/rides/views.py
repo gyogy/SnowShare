@@ -98,11 +98,13 @@ def new_ride(request):
         return render(request, 'rides/add.html', {'form': form})
 
 
+@login_required(login_url='login')
 def listRides(request):
     rides = Ride.objects.all()
     return render(request, 'rides/list.html', {'rides': rides})
 
 
+@login_required(login_url='login')
 def view(request, ride_id):
     ride = get_object_or_404(Ride, id=ride_id)
     return render(request, 'rides/detail.html', {'ride': ride})
@@ -130,11 +132,13 @@ def take_ride(request):
         return render(request, 'rides/take_ride.html', {'form': form})
 
 
+@login_required(login_url='login')
 def list_resorts(request):
     resorts = Resort.objects.all()
     return render(request, 'resorts/list.html', {'resorts': resorts})
 
 
+@login_required(login_url='login')
 def resort_details(request, resort_id):
     resort = get_object_or_404(Resort, id=resort_id)
     rides = Ride.objects.filter(destination=resort_id)
