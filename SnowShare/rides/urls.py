@@ -12,4 +12,5 @@ urlpatterns = [
     path('list/', views.listRides, name="list"),
     path('view/<int:ride_id>', views.view, name="view"),
     path('logout/', views.logoutUser, name="logout"),
+    path('take_ride/', views.take_ride, name="take_ride")
 ]

@@ -1,0 +1,8 @@
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+   	{% for message in messages %}
+	<p>{{message}}</p>
+	{% endfor %}
+    <input type="submit" name="Take Ride">
+</form>

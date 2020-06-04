@@ -1,11 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateUserForm, CreateCar, CreateRide
+from .forms import CreateUserForm, CreateCar, CreateRide, TakeRide
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Car, Ride
-import copy
 
 
 @login_required(login_url='login')
@@ -77,7 +76,6 @@ def new_car(request):
 @login_required(login_url='login')
 def delete_car(request, car_id):
     if request.method == 'POST':
-        print('hello')
         Car.objects.filter(id=car_id).delete()
     return redirect('index')
 
@@ -97,6 +95,7 @@ def new_ride(request):
     else:
         form = CreateRide()
         form.fields["car"].queryset = cars
+<<<<<<< HEAD
         return render(request, 'rides/add.html', {'form': form})
 
 
@@ -108,3 +107,28 @@ def listRides(request):
 def view(request, ride_id):
     ride = get_object_or_404(Ride, id=ride_id)
     return render(request, 'rides/detail.html', {'ride': ride})
+=======
+        return render(request, 'rides/add_ride.html', {'form': form})
+
+
+@login_required(login_url='login')
+def take_ride(request):
+    if request.method == "POST":
+        data = request.POST
+        form = TakeRide(data=data)
+        if form.is_valid():
+            ride = Ride.objects.get(id=data['ride'])
+            if ride.free_seats <= 0:
+                messages.info(request, 'All seats are already taken. Sorry. :(')
+                return render(request, 'rides/take_ride.html', {'form': form})
+            else:
+                ride.free_seats -= 1
+                ride.save()
+            form.save(psg=request.user)
+            return render(request, 'rides/take_ride.html')
+        else:
+            return render(request, 'rides/take_ride.html', {'form': form})
+    else:
+        form = TakeRide()
+        return render(request, 'rides/take_ride.html', {'form': form})
+>>>>>>> 3e7aff58156221f238ab1c833e096442c2db4a1c
