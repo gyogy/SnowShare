@@ -1,10 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, CreateCar
+from .forms import CreateUserForm, CreateCar, CreateRide
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Car
+from .models import Car, Ride
+import copy
 
 
 @login_required(login_url='login')
@@ -59,7 +60,7 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def new_car(request):
-    print(request.user.id)
+
     if request.method == "POST":
         data = request.POST
         form = CreateCar(data=data)
@@ -79,3 +80,18 @@ def delete_car(request, car_id):
         print('hello')
         Car.objects.filter(id=car_id).delete()
     return redirect('index')
+  
+@login_required(login_url='login')
+def new_ride(request):
+    if request.method == "POST":
+        data = request.POST
+        form = CreateRide(data=data)
+
+        if form.is_valid():
+            new_ride = form.save(driver=request.user)
+            return render(request, 'rides/ride_detail.html', {'new_ride': new_ride})
+        else:
+            return render(request, 'rides/add_ride.html', {'form': form})
+    else:
+        form = CreateRide()
+        return render(request, 'rides/add_ride.html', {'form': form}
