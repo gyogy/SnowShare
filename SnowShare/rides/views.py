@@ -157,5 +157,5 @@ def driver(request):
 def passanger(request):
     user_id = request.user
     name = request.user.username
-    rides = Ride.objects.filter(passengerride__passenger_id=user_id)
+    rides = Ride.objects.filter(passengerride__passenger=user_id)
     return render(request, 'rides/passanger.html', {'rides': rides, 'name': name})
