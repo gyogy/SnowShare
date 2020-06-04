@@ -1,8 +1,7 @@
 {% extends "accounts/base.html" %} {% block content %}
 
 <p class="h1" style="text-align:center">{{resort.name}}</p>
-{% for ride in rides %}
-{% if ride.free_seats > 0 %}
+
 <table class="table">
   <thead>
     <tr>
@@ -12,6 +11,8 @@
       <th scope="col">Reserve Seat</th>
     </tr>
   </thead>
+  {% for ride in rides %}
+  {% if ride.free_seats > 0 %}
   <tbody>
     <form method="POST" action="{% url 'take_ride' %}">
     {% csrf_token %}

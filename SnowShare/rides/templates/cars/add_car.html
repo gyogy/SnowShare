@@ -1,11 +1,33 @@
 {% extends "accounts/base.html" %} {% block content %}
-<body style="background-color:aqua;">
-	<div style="border-style:solid; border-width:2px; background-color:white; width:80%; margin-top:5%; margin-left:10%">
-		<form method="POST">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<input type="submit" name="Add Car">
+<body >
+
+	<div style="border-style:solid; border-width:2px; background-color:white; width:80%; margin-top:5%; margin-left:10%;">
+		<h1 style="text-align: center">Add new car</h1>
+	    <form method="POST">
+		<table class="table">
+		  <tbody>
+
+		    {% csrf_token %}
+		    <tr>
+	    	  <th>{{form.make.label}}</th>
+		      <td>{{form.make}}</td>
+		    </tr>
+		    <tr>
+		    	<th>{{form.typ.label}}</th>
+		    	<td>{{form.typ}}</td>
+		    </tr>
+		    <tr>
+		    	<th>{{form.capacity.label}}</th>
+		    	<td>{{form.capacity}}</td>
+		    </tr>
+
+		    
+		  </tbody>
+
+		</table>
+		    <input style="margin-left: 40%" type="submit" name="Add Car">
 		</form>
+		
 	</div>
 </body>
 {% endblock %}

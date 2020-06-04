@@ -1,8 +1,22 @@
 {% extends "accounts/base.html" %} {% block content %}
 
-<p>Make: {{new_car.make}} Type: {{new_car.typ}}</p>
-<p>Type: {{new_car.typ}}</p>
-<p>Capacity: {{new_car.capacity}}</p>
-<p>Owner name: {{new_car.owner.first_name}} {{new_car.owner.last_name}}</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Make</th>
+      <th scope="col">Type</th>
+      <th scope="col">Capacity</th>
+      <th scope="col">Owner name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{new_car.make}}</th>
+      <td>{{new_car.typ}}</td>
+      <td>{{new_car.capacity}}</td>
+      <td>{{new_car.owner.first_name}} {{new_car.owner.last_name}}</td>
+    </tr>
 
+  </tbody>
+</table>
 {% endblock %}

@@ -1,15 +1,25 @@
 {% extends "accounts/base.html" %} {% block content %}
-
-<p>Destination: {{ride.destination}}</p>
-<p>Date: {{ride.date}}</p>
-<p>Driver: {{ride.driver.username}}</p>
-<p>Car: {{ride.car}}</p>
-<p>Free seats: {{ride.free_seats}}</p>
-<p>Price: {{ride.price}}</p>
-
-Passangers in this ride:
-{% for passanger in psg%}
-{{passanger.username}};
-{% endfor%}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Destination</th>
+      <th scope="col">Date</th>
+      <th scope="col">Driver</th>
+      <th scope="col">Car</th>
+      <th scope="col">Free seats</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ride.destination}}</th>
+      <td>{{ride.date}}</td>
+      <td>{{ride.driver.username}}</td>
+      <td>{{ride.car}}</td>
+      <td>{{ride.free_seats}}</td>
+      <td>{{ride.price}}</td>
+    </tr>
+  </tbody>
+</table>
 
 {% endblock %}
