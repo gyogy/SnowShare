@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreateUserForm, CreateCar, CreateRide
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -90,11 +90,21 @@ def new_ride(request):
         form = CreateRide(data=data)
         form.fields["car"].queryset = cars
         if form.is_valid():
-            new_ride = form.save(driver=request.user)
-            return render(request, 'rides/ride_detail.html', {'new_ride': new_ride})
+            ride = form.save(driver=request.user)
+            return render(request, 'rides/detail.html', {'ride': ride})
         else:
-            return render(request, 'rides/add_ride.html', {'form': form})
+            return render(request, 'rides/add.html', {'form': form})
     else:
         form = CreateRide()
         form.fields["car"].queryset = cars
-        return render(request, 'rides/add_ride.html', {'form': form})
+        return render(request, 'rides/add.html', {'form': form})
+
+
+def listRides(request):
+    rides = Ride.objects.all()
+    return render(request, 'rides/list.html', {'rides': rides})
+
+
+def view(request, ride_id):
+    ride = get_object_or_404(Ride, id=ride_id)
+    return render(request, 'rides/detail.html', {'ride': ride})

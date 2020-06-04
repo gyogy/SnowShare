@@ -1,0 +1,4 @@
+<h2> All avaliable rides: </h2>
+{% for ride in rides %}
+<p><a href=" {% url 'view' ride.id %}">{{ ride.destination }}, {{ ride.free_seats}} seat(s), at {{ ride.price }} per seat.</a></p>
+{% endfor %}

@@ -9,5 +9,7 @@ urlpatterns = [
     path('add_ride/', views.new_ride, name='add_ride'),
     path('register/', views.registerPage, name="register"),
     path('login/', views.loginPage, name="login"),
+    path('list/', views.listRides, name="list"),
+    path('view/<int:ride_id>', views.view, name="view"),
     path('logout/', views.logoutUser, name="logout"),
 ]
