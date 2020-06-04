@@ -80,7 +80,8 @@ def delete_car(request, car_id):
         print('hello')
         Car.objects.filter(id=car_id).delete()
     return redirect('index')
-  
+
+
 @login_required(login_url='login')
 def new_ride(request):
     if request.method == "POST":
@@ -94,4 +95,4 @@ def new_ride(request):
             return render(request, 'rides/add_ride.html', {'form': form})
     else:
         form = CreateRide()
-        return render(request, 'rides/add_ride.html', {'form': form}
+        return render(request, 'rides/add_ride.html', {'form': form})
