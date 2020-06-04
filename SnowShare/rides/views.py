@@ -84,10 +84,11 @@ def delete_car(request, car_id):
 
 @login_required(login_url='login')
 def new_ride(request):
+    cars = Car.objects.filter(owner__username=request.user.username)
     if request.method == "POST":
         data = request.POST
         form = CreateRide(data=data)
-
+        form.fields["car"].queryset = cars
         if form.is_valid():
             new_ride = form.save(driver=request.user)
             return render(request, 'rides/ride_detail.html', {'new_ride': new_ride})
@@ -95,4 +96,5 @@ def new_ride(request):
             return render(request, 'rides/add_ride.html', {'form': form})
     else:
         form = CreateRide()
+        form.fields["car"].queryset = cars
         return render(request, 'rides/add_ride.html', {'form': form})

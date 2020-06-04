@@ -49,3 +49,9 @@ class Ride(models.Model):
 
     def __str__(self):
         return f'A ride to {self.destination}'
+
+
+class PassengerRide(models.Model):
+    ridel = models.ForeignKey(Ride, on_delete=models.CASCADE)
+    seats = models.IntegerField()
+    passenger = models.ForeignKey(User, on_delete=models.CASCADE)
