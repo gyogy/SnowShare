@@ -7,4 +7,9 @@
 <p>Free seats: {{ride.free_seats}}</p>
 <p>Price: {{ride.price}}</p>
 
+Passangers in this ride:
+{% for passanger in psg%}
+{{passanger.username}};
+{% endfor%}
+
 {% endblock %}

@@ -4,7 +4,7 @@ from .forms import CreateUserForm, CreateCar, CreateRide, TakeRide
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Car, Ride, Resort
+from .models import Car, Ride, Resort, User
 
 
 @login_required(login_url='login')
@@ -107,7 +107,8 @@ def listRides(request):
 @login_required(login_url='login')
 def view(request, ride_id):
     ride = get_object_or_404(Ride, id=ride_id)
-    return render(request, 'rides/detail.html', {'ride': ride})
+    passangers = User.objects.filter(passengerride__ride_id=ride_id)
+    return render(request, 'rides/detail.html', {'ride': ride, 'psg': passangers})
 
 
 @login_required(login_url='login')
