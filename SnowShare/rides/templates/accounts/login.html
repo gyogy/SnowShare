@@ -21,9 +21,12 @@
 	<p>{{message}}</p>
 	{% endfor %}
     <button type="submit" class="btn btn-success">Login<i class="glyphicon glyphicon-send"></i></button>
+    <button style="margin-right:100px" type="submit" class="btn btn-success"><a href="{% url 'register' %}" style="color: white" >Register</a><i class="glyphicon glyphicon-send"></i></button>
   </form>
   </div>
 </div>
+
+<button type="submit" class="btn btn-success"><a href="{% url 'register' %}" style="color: white">Register</a><i class="glyphicon glyphicon-send"></i></button>
 
 
 
