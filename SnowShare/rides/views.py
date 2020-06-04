@@ -114,22 +114,19 @@ def view(request, ride_id):
 def take_ride(request):
     if request.method == "POST":
         data = request.POST
-        form = TakeRide(data=data)
-        if form.is_valid():
-            ride = Ride.objects.get(id=data['ride'])
-            if ride.free_seats <= 0:
-                messages.info(request, 'All seats are already taken. Sorry. :(')
-                return render(request, 'rides/take_ride.html', {'form': form})
-            else:
-                ride.free_seats -= 1
-                ride.save()
-            form.save(psg=request.user)
-            return render(request, 'rides/take_ride.html')
+        ride = Ride.objects.get(id=data['ride_id'])
+        form = TakeRide()
+        if ride.free_seats <= 0:
+            messages.info(request, 'All seats are already taken. Sorry. :(')
+            return redirect('resorts')
         else:
-            return render(request, 'rides/take_ride.html', {'form': form})
+            ride.free_seats -= 1
+            ride.save()
+            form.save(psg=request.user, ride=ride)
+            return redirect('resorts')
     else:
         form = TakeRide()
-        return render(request, 'rides/take_ride.html', {'form': form})
+        return redirect('resorts')
 
 
 @login_required(login_url='login')

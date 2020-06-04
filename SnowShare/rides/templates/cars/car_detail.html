@@ -1,4 +1,8 @@
+{% extends "accounts/base.html" %} {% block content %}
+
 <p>Make: {{new_car.make}} Type: {{new_car.typ}}</p>
 <p>Type: {{new_car.typ}}</p>
 <p>Capacity: {{new_car.capacity}}</p>
 <p>Owner name: {{new_car.owner.first_name}} {{new_car.owner.last_name}}</p>
+
+{% endblock %}

@@ -1,11 +1,31 @@
 {% extends "accounts/base.html" %} {% block content %}
 
-<h2>{{resort.name}}</h2>
+<p class="h1" style="text-align:center">{{resort.name}}</p>
 {% for ride in rides %}
 {% if ride.free_seats > 0 %}
-<p>Ride in {{ride.car}} for ${{ride.price}} a seat, {{ride.free_seats}} avaliable.</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ride Car</th>
+      <th scope="col">Price</th>
+      <th scope="col">Free seats</th>
+      <th scope="col">Reserve Seat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <form method="POST" action="{% url 'take_ride' %}">
+    {% csrf_token %}
+    <tr>
+      <th scope="row">{{ride.car}}</th>
+      <td>{{ride.price}}</td>
+      <td>{{ride.free_seats}}</td>
+      <td><button type="submit" name="ride_id" value={{ride.id}}>Reserve</button></td>
+    </tr>
+    </form>
+  </tbody>
+</table>
 {% endif %}
 {% endfor %}
-<p><button type="button"><a href="{% url 'resorts' %}">Back to resort list</a></button><p/>
+<!-- <p><button type="button"><a href="{% url 'resorts' %}">Back to resort list</a></button><p/> -->
 
 {% endblock %}
