@@ -147,7 +147,7 @@ def resort_details(request, resort_id):
 
 @login_required(login_url='login')
 def driver(request):
-    user_id = request.user.id
+    user_id = request.user
     name = request.user.username
     rides = Ride.objects.filter(driver=user_id)
     return render(request, 'rides/driver.html', {'rides': rides, 'name': name})
@@ -155,7 +155,7 @@ def driver(request):
 
 @login_required(login_url='login')
 def passanger(request):
-    user_id = request.user.id
+    user_id = request.user
     name = request.user.username
     rides = Ride.objects.filter(passengerride__passenger_id=user_id)
     return render(request, 'rides/passanger.html', {'rides': rides, 'name': name})

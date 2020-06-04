@@ -1,13 +1,25 @@
 {% extends "accounts/base.html" %} {% block content %}
 <h2>{{name}} is driving to:</h2>
 
-<ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ride Destination</th>
+      <th scope="col">Ride date</th>
+    </tr>
+  </thead>
+  <tbody>
 {% for ride in rides %}
-<li>
-    <a href="{% url 'view' ride.id %}">{{ride.destination}}, on {{ride.date}}</a>>
-</li>
+
+    <tr>
+      <th scope="row"><a href="{% url 'view' ride.id %}">{{ride.destination}}</a></th>
+      <td>{{ride.date}}</td>
+    </tr>
 
 {% endfor%}
+  </tbody>
+</table>
 </ul>
+
 
 {%  endblock %}
