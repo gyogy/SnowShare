@@ -4,7 +4,7 @@ from .forms import CreateUserForm, CreateCar, CreateRide, TakeRide
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Car, Ride
+from .models import Car, Ride, Resort
 
 
 @login_required(login_url='login')
@@ -128,3 +128,14 @@ def take_ride(request):
     else:
         form = TakeRide()
         return render(request, 'rides/take_ride.html', {'form': form})
+
+
+def list_resorts(request):
+    resorts = Resort.objects.all()
+    return render(request, 'resorts/list.html', {'resorts': resorts})
+
+
+def resort_details(request, resort_id):
+    resort = get_object_or_404(Resort, id=resort_id)
+    rides = Ride.objects.filter(destination=resort_id)
+    return render(request, 'resorts/detail.html', {'resort': resort, 'rides': rides})

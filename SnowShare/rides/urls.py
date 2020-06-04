@@ -12,5 +12,7 @@ urlpatterns = [
     path('list/', views.listRides, name="list"),
     path('view/<int:ride_id>', views.view, name="view"),
     path('logout/', views.logoutUser, name="logout"),
-    path('take_ride/', views.take_ride, name="take_ride")
+    path('take_ride/', views.take_ride, name="take_ride"),
+    path('resorts/', views.list_resorts, name="resorts"),
+    path('resorts/<int:resort_id>', views.resort_details, name="resort_details"),
 ]
