@@ -8,6 +8,7 @@
       <th scope="col">Ride Destination</th>
       <th scope="col">Ride date</th>
       <th scope="col">Free seats</th>
+      <th scope="col">Start Point</th>
       <th scope="col">Price per seat</th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <th scope="row"><a href="{% url 'view' ride.id %}">{{ride.destination}}</a></th>
       <td>{{ride.date}}</td>
       <td>{{ride.free_seats}}</td>
+      <th>{{ride.phone}}</th>
       <td>{{ride.price}}</td>
     </tr>
 {% endif %}

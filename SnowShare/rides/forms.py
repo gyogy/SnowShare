@@ -27,7 +27,7 @@ class CreateCar(forms.ModelForm):
 class CreateRide(forms.ModelForm):
     class Meta:
         model = Ride
-        fields = ('destination', 'date', 'car', 'free_seats', 'price')
+        fields = ('destination', 'date', 'car', 'free_seats', 'startPoint', 'phone', 'price')
 
     def save(self, driver=None, commit=True):
         ride = super(CreateRide, self).save(commit=False)
