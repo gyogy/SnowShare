@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+from django.core.validators import RegexValidator
 
 
 # class User(models.Model):
@@ -47,6 +48,8 @@ class Ride(models.Model):
     driver = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     date = models.DateField(default=date.today)
+    startPoint = models.CharField(max_length=15)
+    phone = models.CharField(max_length=10, validators=[RegexValidator(r'^[0-9]*$')])
     price = models.DecimalField(max_digits=5, decimal_places=2)
     free_seats = models.IntegerField()
 

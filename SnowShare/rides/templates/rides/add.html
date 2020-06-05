@@ -6,7 +6,6 @@
 	    <form method="POST">
 		<table class="table">
 		  <tbody>
-
 		    {% csrf_token %}
 		    <tr>
 	    	  <th>{{form.destination.label}}</th>
@@ -28,7 +27,14 @@
 		    	<th>{{form.price.label}}</th>
 		    	<td>{{form.price}}</td>
 		    </tr>
-		    
+		    <tr>
+		    	<th>Start Point</th>
+		    	<td>{{form.startPoint}}</td>
+		    </tr>
+		    <tr>
+		    	<th>Phone Number</th>
+		    	<td>{{form.phone}}</td>
+		    </tr>
 		  </tbody>
 
 		</table>
