@@ -17,7 +17,6 @@
           My profile
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'add_ride' %}">Add Ride</a>
           <a class="dropdown-item" href="{% url 'add_car' %}">Add Car</a>
           <a class="dropdown-item" href="{% url 'index' %}">View Profile</a>
         </div>
@@ -28,6 +27,7 @@
           Rides
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'add_ride' %}">Add Ride</a>
           <a class="dropdown-item" href="{% url 'list' %}">All Rides</a>
           <a class="dropdown-item" href="{% url 'passanger' %}">Rides I'm taking</a>
           <a class="dropdown-item" href="{% url 'driver' %}">Rides I'm driving</a>
