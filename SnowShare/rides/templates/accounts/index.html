@@ -23,11 +23,14 @@
   </tbody>
 </table>
 </div>
-<!-- <h3> My Cars: </h3>
-{% for car in cars %}
-<p>Make: {{car.make}} Type: {{car.typ}}</p>
-<form method="POST" action="{% url 'delete_car' car.id %}">{% csrf_token %}<button>Delete</button></form>
-{% endfor %}
- -->
+<h3> My Cars: </h3>
+{% if cars %}
+    {% for car in cars %}
+    <p>Make: {{car.make}} Type: {{car.typ}}</p>
+    <form method="POST" action="{% url 'delete_car' car.id %}">{% csrf_token %}<button>Delete</button></form>
+    {% endfor %}
+{%else%}
+    <p>No cars added yet.</p>
+{% endif%}
 
 {%  endblock %}
