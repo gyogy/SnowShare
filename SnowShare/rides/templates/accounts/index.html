@@ -23,14 +23,33 @@
   </tbody>
 </table>
 </div>
-<h3> My Cars: </h3>
-{% if cars %}
-    {% for car in cars %}
-    <p>Make: {{car.make}} Type: {{car.typ}}</p>
-    <form method="POST" action="{% url 'delete_car' car.id %}">{% csrf_token %}<button>Delete</button></form>
-    {% endfor %}
-{%else%}
-    <p>No cars added yet.</p>
+    <div style="text-align:center;width: 80%; margin: auto; padding-top: 5%">
+<h1> My Cars </h1>
+<table class="table" style= "border-width:1px; border-style: solid">
+  <thead>
+    <tr>
+    <th scope="col">Make</th>
+    <th scope="col">Type</th>
+    <th scope="col">Delete</th> 
+  </tr>
+  </thead>
+  {% if cars %}
+  <tbody>
+
+  {% for car in cars %}
+  <tr>
+    <td>{{car.make}}</td>
+    <td>{{car.typ}}</td>
+    <td><form method="POST" action="{% url 'delete_car' car.id %}">{% csrf_token %}<button>Delete</button></form></td>
+  </tr>
+  {% endfor %}
+   </tbody>
+   {%else%}
+    <h2>No cars added yet.</h2>
 {% endif%}
+</table>
+</div>
+
+
 
 {%  endblock %}
